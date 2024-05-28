@@ -284,7 +284,8 @@ li:hover {
   margin-bottom: 20px;
 }
 #contact form,
-#login form {
+#login form,
+#photo-modal-form {
   text-align: left;
   margin-top: 30px;
   display: flex;
@@ -293,13 +294,15 @@ li:hover {
 
 #contact input,
 #login input,
-.modal-wrapper input {
+#photo-modal-form input,
+#photo-modal-form select {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label,
+#photo-modal-form label {
   margin: 2em 0 1em 0;
 }
 #contact textarea,
@@ -373,7 +376,7 @@ footer nav ul {
   align-items: center;
 }
 
-/* Style de la modale */
+/* Style de la modale  Galerie photo*/
 .modal {
   position: fixed;
   top: 0;
@@ -403,14 +406,13 @@ footer nav ul {
 }
 
 .fa-xmark {
-  border-radius: 10px;
   position: absolute;
   top: 30px;
   right: 30px;
   cursor: pointer;
 }
 
-h3 {
+.modal-wrapper h3 {
   font-size: 26px;
 }
 
@@ -418,19 +420,22 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 7px;
-  border-bottom: 2px solid #b3b3b3;
+  border-bottom: 1px solid #b3b3b3;
   padding-bottom: 40px;
   overflow: auto;
 }
+
 .card {
   box-sizing: border-box;
   position: relative;
   margin-bottom: 25px;
 }
+
 .card img {
   height: 100px;
   object-fit: cover;
 }
+
 .trash {
   position: absolute;
   top: 5px;
@@ -444,7 +449,84 @@ h3 {
   color: white;
 }
 
-.modal-wrapper input {
+.btnPhotoLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 240px;
   height: 36px;
+  color: white;
+  margin: 0;
+}
+
+.btnPhotoLink:visited {
+  color: white;
+}
+
+/* Style de la page Ajout photo */
+
+.fa-arrow-left {
+  position: absolute;
+  cursor: pointer;
+  top: 30px;
+  left: 30px;
+}
+
+#photo-modal-form {
+  justify-content: flex-start;
+  margin: 0;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+#add-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  background-color: #e8f1f6;
+  width: 420px;
+  border-radius: 3px;
+  padding: 15px;
+}
+
+.fa-image {
+  color: #b9c5cc;
+}
+
+#add-photo .btnAdd-photo {
+  color: #306685;
+  font-family: "Work Sans";
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background-color: #cbd6dc;
+  border-radius: 50px;
+  width: 180px;
+  height: 36px;
+  margin: 0;
+  padding-top: 10px;
+}
+
+input[type="file"] {
+display: none;
+}
+
+#add-photo p {
+  font-size: 10px;
+}
+
+.btnValid {
+  border: none;
+  width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  background: #a7a7a7;
+  color: white;
+  text-align: center;
+  font-family: Syne;
+  font-size: 14px;
+  font-weight: 700;
 }

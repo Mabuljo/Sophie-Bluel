@@ -115,7 +115,7 @@ const adminDisplay = () => {
     logOut.innerText = "logout";
     // ajout du <a> modifier dans la section portofolio
     lienModale.innerHTML += `
-    <a href="#gallery-modal" class="js-modal">
+    <a href="#modal" class="js-modal">
     <i class="fa-regular fa-pen-to-square"></i>
      modifier</a>
     `;

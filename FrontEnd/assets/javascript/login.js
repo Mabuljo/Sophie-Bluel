@@ -29,7 +29,6 @@ const loginCheck = () => {
         .json()
         .then((response) => (data = response))
         .then((data) => {
-          console.log(data);
           localStorage.setItem("token", data.token); // récuperer le TOKEN et l'enregistrer dans le localStorage
           location.href = "./index.html";
         });
