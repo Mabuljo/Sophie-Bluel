@@ -311,7 +311,8 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-.btn {
+.btn,
+.btn-valid {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -324,7 +325,8 @@ li:hover {
   cursor: pointer;
 }
 
-.error {
+.error,
+.error-add-projet {
   color: red;
   text-align: center;
   margin-top: 15px;
@@ -403,6 +405,7 @@ footer nav ul {
   gap: 30px;
   border-radius: 10px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .fa-xmark {
@@ -434,6 +437,7 @@ footer nav ul {
 .card img {
   height: 100px;
   object-fit: cover;
+  
 }
 
 .trash {
@@ -511,14 +515,14 @@ footer nav ul {
 }
 
 input[type="file"] {
-display: none;
+  display: none;
 }
 
 #add-photo p {
   font-size: 10px;
 }
 
-.btnValid {
+.btnDisabled {
   border: none;
   width: 237px;
   height: 36px;
@@ -529,4 +533,8 @@ display: none;
   font-family: Syne;
   font-size: 14px;
   font-weight: 700;
+}
+.btn-valid {
+  margin: 0;
+  height: 36px;
 }

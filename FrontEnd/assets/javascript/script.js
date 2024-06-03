@@ -61,7 +61,7 @@ const projectCreate = async (projectData) => {
     .map(
       (project) =>
         `
-        <figure>
+        <figure id="${project.id}">
           <img src=${project.imageUrl} alt="${project.title}"></img>
           <figcaption>${project.title}</figcaption>  
         </figure> 
