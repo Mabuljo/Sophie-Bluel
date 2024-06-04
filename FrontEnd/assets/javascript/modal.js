@@ -293,26 +293,32 @@ const closePhotoModal = async () => {
 // Suppression de projets dans la vue "Galerie Photo"
 // ---------------------------------------------------
 
-const projectDelete = async(projectId) => {
+const projectDelete = async (projectId) => {
   console.log("Suppression du projet avec l'Id:", projectId); // Pour vérifier que la bonne ID est passée
   let confirmation = confirm("Voulez-vous supprimer ce projet?");
   if (confirmation === true) {
     try {
-      await fetch(`http://localhost:5678/api/works/${projectId}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }).then((response) => {
-        if (response.status === 200) {
-          alert("Le projet a bien été supprimé");
-          projectDisplay(projectData);
-          modalDisplay(projectData);
-          document.getElementById("gallery-modal").style.display = null;
-        } else {
-          alert("Erreur : le projet n'a pas pu être supprimé");
+      const response = await fetch(
+        `http://localhost:5678/api/works/${projectId}`,
+        {
+          method: "DELETE",
+          headers: { authorization: `Bearer ${token}` },
         }
-      });
+      );
+      if (response.ok) {
+        alert("Le projet a bien été supprimé");
+
+        // Supprimer l'élément du DOM
+        document.getElementById(projectId).remove();
+
+        // Recharger les projets
+        await projectDisplay();
+        await modalDisplay();
+        document.getElementById("gallery-modal").style.display = null;
+        
+      } else {
+        alert("Erreur : le projet n'a pas pu être supprimé");
+      }
     } catch (error) {
       console.error("Erreur lors de la suppression du projet:", error);
       alert("Une erreur s'est produite. Veuillez réessayer.");
