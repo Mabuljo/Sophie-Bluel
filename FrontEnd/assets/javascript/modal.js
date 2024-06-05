@@ -1,9 +1,7 @@
 // -----------------------
 // Création des variables
 // -----------------------
-
 const modalContainer = document.getElementById("modal");
-
 let modal = null;
 
 // --------------------------------------------
@@ -32,16 +30,6 @@ const addNewProject = async (e) => {
   const image = document.getElementById("photo").files[0];
   const title = document.getElementById("title").value;
   const category = parseInt(document.getElementById("add-categorie").value);
-  const errorAddProject = document.querySelector(".error-add-projet");
-
-  // Vérification des champs du formulaire
-  if (!image || !title || !category) {
-    errorAddProject.innerText = "Veuillez remplir tous les champs";
-    console.log("Formulaire incomplet");
-    return;
-  } else {
-    errorAddProject.innerText = "";
-  }
 
   const formData = new FormData();
   formData.append("image", image);
@@ -57,7 +45,6 @@ const addNewProject = async (e) => {
       body: formData,
     }).then((response) => {
       if (response.status === 201) {
-        alert("Le projet a bien été ajouté");
         backToGallery(e);
       } else {
         alert("Le projet n'a pas pu être ajouté");
@@ -69,10 +56,13 @@ const addNewProject = async (e) => {
   }
 };
 
+// fonction pour revenir à la vue "galerie photo" après l'ajout d'un projet
 const backToGallery = (e) => {
   e.preventDefault();
+  // Recharger les projets
   projectDisplay();
   modalDisplay();
+  // Ferme la vue "ajout photo"
   closePhotoModal(e);
 };
 
@@ -109,10 +99,8 @@ const createModal = () => {
           <select name="add-categorie" id="add-categorie">
             <option value=""></option>
           </select>
-        </form>   
-        <input type="submit" value="Valider" class="btnDisabled js-validPhoto" disabled/>
-        <p class="error-add-projet"></p>
-      
+      </form>   
+      <input type="submit" value="Valider" class="btnDisabled js-validPhoto" disabled/>
     </div>
   `;
 
@@ -138,7 +126,7 @@ const createModal = () => {
     }
   };
 
-  // Ecouter le changement pour afficher un aperçu de l'image qu'on ajoute
+  // Ecouter le changement pour afficher l'aperçu de l'image qu'on ajoute
   photoInput.addEventListener("change", photoPreviewCheck);
 
   // Fonction pour activer le bouton "valider" si tous les champs sont remplis
@@ -161,6 +149,7 @@ const createModal = () => {
       validation.setAttribute("disabled", true);
     }
   };
+
   // Vérifier si les champs sont bien remplis
   photoInput.addEventListener("change", checkValidation);
   titleInput.addEventListener("input", checkValidation);
@@ -194,8 +183,6 @@ const photoCreate = (projectData) => {
 
       // Pour récuperer l'ID de l'élément parent et le transformer en number
       const projectId = parseInt(trash.closest(".card").id);
-      console.log("Element:", trash.closest(".card"));
-      console.log("Project ID:", projectId);
       projectDelete(projectId);
     });
   });
@@ -267,13 +254,18 @@ const stopPropagation = (e) => {
 //---------------------------------------------------------------
 // Ecouter le clic sur la class "js-modal" pour ouvrir la modale
 //---------------------------------------------------------------
+const jsModal = () => {
+  document.querySelector(".js-modal").addEventListener("click", openModal);
+};
 
-document.querySelector(".js-modal").addEventListener("click", openModal);
-
+if (token !== null) {
+  jsModal();
+}
 // ----------------------------------------------------------
 // Fonctions d'ouverture et fermeture de la vue "Ajout photo"
 // ----------------------------------------------------------
 
+// fonction d'ouverture
 const openPhotoModal = async () => {
   document.getElementById("photo-modal").style.display = null;
   document.getElementById("gallery-modal").style.display = "none";
@@ -281,9 +273,10 @@ const openPhotoModal = async () => {
   // Écoutez le clic sur le bouton "back-to-gallery" pour revenir à "galerie photo"
   document
     .querySelector(".js-back-to-gallery")
-    .addEventListener("click", closePhotoModal);
+    .addEventListener("click", closePhotoModal); 
 };
 
+// fonction de fermeture
 const closePhotoModal = async () => {
   document.getElementById("photo-modal").style.display = "none";
   document.getElementById("gallery-modal").style.display = null;
@@ -294,7 +287,6 @@ const closePhotoModal = async () => {
 // ---------------------------------------------------
 
 const projectDelete = async (projectId) => {
-  console.log("Suppression du projet avec l'Id:", projectId); // Pour vérifier que la bonne ID est passée
   let confirmation = confirm("Voulez-vous supprimer ce projet?");
   if (confirmation === true) {
     try {
@@ -305,17 +297,15 @@ const projectDelete = async (projectId) => {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      if (response.ok) {
-        alert("Le projet a bien été supprimé");
 
+      if (response.ok) {
         // Supprimer l'élément du DOM
         document.getElementById(projectId).remove();
 
         // Recharger les projets
+        document.getElementById("gallery-modal").style.display = "block";
         await projectDisplay();
         await modalDisplay();
-        document.getElementById("gallery-modal").style.display = null;
-        
       } else {
         alert("Erreur : le projet n'a pas pu être supprimé");
       }

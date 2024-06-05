@@ -86,6 +86,7 @@ const categorieChoose = async () => {
         // Cas dynamique pour les autres catégories
         const categoryId = parseInt(e.target.id.replace("btn", ""));
         category = projectData.filter((data) => data.categoryId === categoryId);
+        document.getElementById("btnTous").classList.remove("btn-tous");
       }
 
       projectCreate(category);
@@ -101,7 +102,6 @@ const projectDisplay = async () => {
 };
 
 projectDisplay();
-
 
 // -------------------------------------
 // Affichage de la page administrateur

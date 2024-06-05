@@ -1,3 +1,6 @@
+// -----------------------
+// Création des variables
+// -----------------------
 const btnConnect = document.getElementById("btnConnect");
 
 // -------------------------------------
@@ -5,7 +8,6 @@ const btnConnect = document.getElementById("btnConnect");
 // -------------------------------------
 
 const loginCheck = () => {
-
   // Récupération identifiant & mot de passe tapés
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");

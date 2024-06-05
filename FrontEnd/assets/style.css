@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -242,6 +243,7 @@ li:hover {
   gap: 1em;
   margin-bottom: 3em;
 }
+
 .btn-filtre {
   border-radius: 60px;
   border: 1px solid #1d6154;
@@ -254,7 +256,8 @@ li:hover {
   padding: 9px 20px;
 }
 
-.btn-filtre:focus {
+.btn-filtre:focus,
+.btn-tous {
   color: white;
   background-color: #1d6154;
 }
@@ -325,8 +328,7 @@ li:hover {
   cursor: pointer;
 }
 
-.error,
-.error-add-projet {
+.error {
   color: red;
   text-align: center;
   margin-top: 15px;
@@ -437,7 +439,6 @@ footer nav ul {
 .card img {
   height: 100px;
   object-fit: cover;
-  
 }
 
 .trash {
@@ -468,7 +469,6 @@ footer nav ul {
 }
 
 /* Style de la page Ajout photo */
-
 .fa-arrow-left {
   position: absolute;
   cursor: pointer;
@@ -534,6 +534,7 @@ input[type="file"] {
   font-size: 14px;
   font-weight: 700;
 }
+
 .btn-valid {
   margin: 0;
   height: 36px;
